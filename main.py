@@ -47,7 +47,7 @@ def download():
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
-    path = list((Path(__file__).parent/"files").glob(file_name + '.*'))
+    path = list((Path(__file__).parent/"files").glob('*' + file_name + '.*'))
     resp = send_file(path[0], as_attachment=True)
     shutil.rmtree(path[0].absolute(), ignore_errors=True)
     return resp
