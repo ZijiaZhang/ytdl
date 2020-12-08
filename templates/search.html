@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for item in results %}
+     <li><form action="/download" method="get">
+       <a href="https://www.youtube.com{{ item['url_suffix'] }}">{{ item['title'] }}</a>
+       <input style="display: none" name="url" value="https://www.youtube.com{{ item['url_suffix'] }}"/>
+       <button type="submit">Download</button>
+    </form></li>
+{% endfor %}
+<script>
+</script>
+</body>
+</html>
