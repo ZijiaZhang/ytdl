@@ -41,7 +41,7 @@ def download():
     url = request.args.get('url')
     file_name = uuid.uuid4().hex
     ydl_opts = {
-        'outtmpl': "files/" + file_name + ".%(ext)s",
+        'outtmpl': "files/%(title)s" + file_name + ".%(ext)s",
         'logger': MyLogger(),
         'progress_hooks': [my_hook]
     }
