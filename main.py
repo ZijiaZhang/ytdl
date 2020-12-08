@@ -41,13 +41,13 @@ def download():
     url = request.args.get('url')
     file_name = uuid.uuid4().hex
     ydl_opts = {
-        'outtmpl': file_name + ".%(ext)s",
+        'outtmpl': "files/" + file_name + ".%(ext)s",
         'logger': MyLogger(),
         'progress_hooks': [my_hook]
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
-    path = list(Path(__file__).parent.glob(file_name + '.*'))
+    path = list((Path(__file__).parent/"files").glob(file_name + '.*'))
     resp = send_file(path[0], as_attachment=True)
     shutil.rmtree(path[0].absolute(), ignore_errors=True)
     return resp
