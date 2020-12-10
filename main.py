@@ -66,7 +66,7 @@ def proxy_download():
     @after_this_request
     def remove_file(response):
         try:
-            os.remove(path)
+            os.remove(path[0])
             path.close()
         except Exception as error:
             app.logger.error("Error removing or closing downloaded file handle", error)
@@ -91,7 +91,7 @@ def download():
     @after_this_request
     def remove_file(response):
         try:
-            os.remove(path)
+            os.remove(path[0])
             path.close()
         except Exception as error:
             app.logger.error("Error removing or closing downloaded file handle", error)
