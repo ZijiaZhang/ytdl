@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download</title>
+</head>
+<body>
+<table>
+    <tr><th>Format</th><th>Note</th><th>Size</th><th>FPS</th><th>Link</th></tr>
+{% for item in formats %}
+    <tr>
+        <td>{{ item["ext"] }} </td><td>{{ item["format_note"] }}</td><td>{{ item["filesize"] }}</td>
+        <td>{{ item["fps"] }}</td><td><a href=" {{ item['url'] }}" download> Download </a></td>
+    </tr>
+{% endfor %}
+</table>
+</body>
+</html>

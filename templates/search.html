@@ -3,15 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+
+<style>
+
+
+</style>
+
+
 {% for item in results %}
-     <li><form action="/download" method="get">
-       <a href="https://www.youtube.com{{ item['url_suffix'] }}">{{ item['title'] }}</a>
-       <input style="display: none" name="url" value="https://www.youtube.com{{ item['url_suffix'] }}"/>
-       <button type="submit">Download</button>
-    </form></li>
+<div class="wrapper">
+    <div class="inner-wrapper">
+        <div class="card" style='background-image: url(/proxy?{{ item["thumbnails"] }}'>
+            <div class="card__content">
+                <a class="play-button" href="https://www.youtube.com{{ item['url_suffix'] }}">
+                    <svg version="1.1" viewBox="0 0 50 50" x="0px"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+                        <path class="polygon"
+                              d="M42.7,42.7L25,50L7.3,42.7L0,25L7.3,7.3L25,0l17.7,7.3L50,25L42.7,42.7z"></path>
+                        <polygon points="32.5,25 21.5,31.4 21.5,18.6 "></polygon>
+                    </svg>
+                </a>
+
+            </div>
+
+        </div>
+        <div class="card__content--description">
+            <a>{{ item['title'] }}</a>
+            <form action="/proxy-download" method="get">
+                <input name="url" style="display: none" value="https://www.youtube.com{{ item['url_suffix'] }}"/>
+                <button type="submit">Proxy Download</button>
+            </form>
+            <form action="/direct-download" method="get">
+                <input name="url" style="display: none" value="https://www.youtube.com{{ item['url_suffix'] }}"/>
+                <button type="submit">Direct Download</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endfor %}
+
 <script>
 </script>
 </body>
