@@ -27,8 +27,13 @@ def my_hook(d):
 
 
 @app.route('/css/<path:path>')
-def send_js(path):
+def send_css(path):
     return send_from_directory('public/css', path)
+
+
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('public/js', path)
 
 
 @app.route('/')
