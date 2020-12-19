@@ -1,7 +1,7 @@
 import os
 import uuid
 from pathlib import Path
-from flask import Flask, request, render_template, send_file, after_this_request, redirect, send_from_directory
+from flask import Flask, request, render_template, send_file, after_this_request, redirect, send_from_directory, jsonify
 import youtube_dl
 from youtube_search import YoutubeSearch
 import urllib.parse
@@ -26,6 +26,11 @@ def my_hook(d):
         print('Done downloading, now converting ...')
 
 
+# @app.route('/<path:path>')
+# def default(path):
+#     return send_file('public/index.html')
+
+
 @app.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory('public/css', path)
@@ -35,21 +40,21 @@ def send_css(path):
 def send_js(path):
     return send_from_directory('public/js', path)
 
-
-@app.route('/')
-def hello_world():
-    return render_template('index.html')
-
-
-@app.route('/search')
+#
+# # @app.route('/')
+# # def hello_world():
+# #     return render_template('index.html')
+#
+#
+@app.route('/api/search')
 def search():
     query = request.args.get('q')
     results = YoutubeSearch(query).to_dict()
     for x in results:
         x["thumbnails"] = urllib.parse.urlencode({'url': x["thumbnails"][0]})
-    return render_template('search.html', results=results)
-
-
+    return jsonify(results)
+#
+#
 @app.route('/proxy-download')
 def proxy_download():
     url = request.args.get('url')
@@ -105,12 +110,16 @@ def direct_download():
         info = ydl.extract_info(url, download=False)
     return render_template('download.html', formats=info["formats"])
 
-
+#
 @app.route('/proxy')
 def proxy():
     url = request.args.get('url')
     response = requests.get(url)
     return response.content, response.status_code, response.headers.items()
+
+@app.errorhandler(404)
+def not_found(e):
+    return send_file('public/index.html')
 
 
 if __name__ == '__main__':
