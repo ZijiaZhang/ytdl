@@ -23,6 +23,16 @@ export class SearchPage extends React.Component{
             .then((data) => this.setState({results: data}))
     }
 
+    componentDidUpdate() {
+        let params = new URLSearchParams(window.location.search)
+        if (this.params.get('q') != params.get('q')){
+            this.params = params;
+            fetch('/api/search?q='+ encodeURIComponent(this.params.get('q')))
+                .then((response) => response.json())
+                .then((data) => this.setState({results: data}))
+        }
+    }
+
 }
 
 class SearchResult extends React.Component{
@@ -34,7 +44,6 @@ class SearchResult extends React.Component{
 
     render() {
         let url = `url(/proxy?${this.props.thumbnails})`
-        console.log(url)
         return(
           <div className="wrapper">
               <div className="inner-wrapper">

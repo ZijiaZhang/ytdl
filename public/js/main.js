@@ -325,7 +325,7 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
         className: "inputSearch",
         name: "q",
         type: "text",
-        value: this.props.query || '',
+        value: this.state.queryString,
         onChange: function onChange(e) {
           return _this2.changeSearch(e);
         }
@@ -410,6 +410,8 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
   _createClass(SearchPage, [{
     key: "render",
     value: function render() {
+      console.log("rendered");
+      console.log(this.state);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "searchPage"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchBar__WEBPACK_IMPORTED_MODULE_1__["SearchBar"], {
@@ -433,10 +435,32 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
       fetch('/api/search?q=' + encodeURIComponent(this.params.get('q'))).then(function (response) {
         return response.json();
       }).then(function (data) {
-        return _this2.setState({
+        console.log(data);
+
+        _this2.setState({
           results: data
         });
       });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var _this3 = this;
+
+      var params = new URLSearchParams(window.location.search);
+      console.log(this.params.get('q'));
+      console.log(params.get('q'));
+
+      if (this.params.get('q') != params.get('q')) {
+        this.params = params;
+        fetch('/api/search?q=' + encodeURIComponent(this.params.get('q'))).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          return _this3.setState({
+            results: data
+          });
+        });
+      }
     }
   }]);
 
@@ -458,7 +482,6 @@ var SearchResult = /*#__PURE__*/function (_React$Component2) {
     key: "render",
     value: function render() {
       var url = "url(/proxy?".concat(this.props.thumbnails, ")");
-      console.log(url);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "wrapper"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

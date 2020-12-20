@@ -10,7 +10,7 @@ export class SearchBar extends React.Component{
     }
     render() {
         return (<div>
-            <input placeholder="Enter your keyword here" className="inputSearch" name="q" type="text" value={this.props.query || ''} onChange={(e) => this.changeSearch(e)}/>
+            <input placeholder="Enter your keyword here" className="inputSearch" name="q" type="text" value={this.state.queryString} onChange={(e) => this.changeSearch(e)}/>
         <Link to={{pathname: "/search", search: "?q="+encodeURIComponent(this.state.queryString)}}>
             <button className="searchButton">Search</button>
         </Link>

@@ -4,9 +4,9 @@
   "description": "Video Downloader Project",
   "main": "index.js",
   "scripts": {
-    "watch": "watch 'npm run build' ./frontend",
+    "watch": "watch \"npm run build\" ./frontend",
     "build": "npx webpack",
-    "start": "python3 ./main.py",
+    "start": "python ./main.py",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
