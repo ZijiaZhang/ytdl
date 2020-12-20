@@ -5,7 +5,7 @@ import {
     Switch
 } from "react-router-dom";
 import {createBrowserHistory} from 'history';
-import {Search} from "./Search";
+import {SearchPage} from "./SearchPage";
 import {Home} from "./Home";
 
 export const history = createBrowserHistory();
@@ -22,7 +22,7 @@ class AppRouter extends Component {
         return (
             <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route path="/search" component={Search}/>
+                <Route path="/search" component={SearchPage}/>
             </Switch>
         );
     }

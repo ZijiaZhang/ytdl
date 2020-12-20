@@ -1,17 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import {SearchBar} from "./SearchBar";
 
 export class Home extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            queryString: '',
             download: ''
         }
-    }
-
-    changeSearch(event){
-        this.setState({'queryString': event.target.value});
     }
 
     changeDownload(event){
@@ -29,10 +25,7 @@ export class Home extends React.Component{
             </Link>
             <br/>
                 <p>Or you can search videos on youtube.</p>
-                <input placeholder="Enter your keyword here" className="inputSearch" name="q" type="text" onChange={(e) => this.changeSearch(e)}/>
-            <Link to={{pathname: "/search", search: "?q="+encodeURIComponent(this.state.queryString)}}>
-                <button className="searchButton">Search</button>
-            </Link>
+                <SearchBar />
             </div>
             </div>
     }

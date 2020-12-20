@@ -1,6 +1,7 @@
-import React, {Component} from "react";
+import React from "react";
+import {SearchBar} from "./SearchBar";
 
-export class Search extends React.Component{
+export class SearchPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {results: []}
@@ -8,7 +9,12 @@ export class Search extends React.Component{
     }
 
     render() {
-        return this.state.results.map((data)=> <SearchResult thumbnails={data.thumbnails} url_suffix={data.url_suffix} title={data.title} key={data.title}/>)
+        return (<div className="searchPage">
+            <SearchBar query={this.params.get('q')}/>
+            <div className="resultsWrapper">
+            {this.state.results.map((data)=> <SearchResult thumbnails={data.thumbnails} url_suffix={data.url_suffix} title={data.title} key={data.title}/>)}
+        </div>
+        </div>)
     }
 
     componentDidMount() {
