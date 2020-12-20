@@ -158,3 +158,20 @@ display:block;
 .card:hover .text-reveal > span:nth-child(2) > span > span {
   transform: translateX(0);
 }
+
+.inputDiv{
+  text-align: center;
+}
+
+.inputSearch{
+  width: 50%;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.searchButton{
+  width: 20%;
+  font-size: 1.5em;
+}
+
