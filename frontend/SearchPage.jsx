@@ -18,16 +18,16 @@ export class SearchPage extends React.Component{
     }
 
     componentDidMount() {
-        fetch('/api/search?q='+ encodeURIComponent(this.params.get('q')))
+        fetch('/api/v1/search?q='+ encodeURIComponent(this.params.get('q')))
             .then((response) => response.json())
             .then((data) => this.setState({results: data}))
     }
 
     componentDidUpdate() {
         let params = new URLSearchParams(window.location.search)
-        if (this.params.get('q') != params.get('q')){
+        if (this.params.get('q') !== params.get('q')){
             this.params = params;
-            fetch('/api/search?q='+ encodeURIComponent(this.params.get('q')))
+            fetch('/api/v1/search?q='+ encodeURIComponent(this.params.get('q')))
                 .then((response) => response.json())
                 .then((data) => this.setState({results: data}))
         }

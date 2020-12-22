@@ -7,6 +7,8 @@ from youtube_search import YoutubeSearch
 import urllib.parse
 import requests
 
+from scraper import search
+
 app = Flask(__name__)
 
 
@@ -46,13 +48,20 @@ def send_js(path):
 # #     return render_template('index.html')
 #
 #
-@app.route('/api/search')
-def search():
+@app.route('/api/v1/search')
+def searchv1():
     query = request.args.get('q')
     results = YoutubeSearch(query).to_dict()
     for x in results:
         x["thumbnails"] = urllib.parse.urlencode({'url': x["thumbnails"][0]})
     return jsonify(results)
+
+@app.route('/api/v2/search')
+def searchv2():
+    query = request.args.get('q')
+    results = search(query)
+    return jsonify(results)
+
 #
 #
 @app.route('/proxy-download')

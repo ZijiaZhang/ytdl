@@ -7,6 +7,7 @@ import {
 import {createBrowserHistory} from 'history';
 import {SearchPage} from "./SearchPage";
 import {Home} from "./Home";
+import {NotFoundPage} from "./NotFoundPage";
 
 export const history = createBrowserHistory();
 
@@ -23,6 +24,7 @@ class AppRouter extends Component {
             <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route path="/search" component={SearchPage}/>
+                <Route path="/" component={NotFoundPage}/>
             </Switch>
         );
     }
